@@ -21,6 +21,7 @@
   margin: 0 auto;
   gap: 3.2rem;
   overflow: scroll;
+  background-color: #f0f8ff;
 }
 
 .sideBar {
