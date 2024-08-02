@@ -4,6 +4,7 @@ import { MdOutlineReport } from "react-icons/md";
 import { MdDashboard, MdToday } from "react-icons/md";
 import { HiUsers } from "react-icons/hi2";
 import { CgViewMonth } from "react-icons/cg";
+import Chart from "../features/dashboard/Chart";
 
 const Dashboard = () => {
   return (
@@ -14,7 +15,7 @@ const Dashboard = () => {
         </div>
         <h2 className="text-2xl font-semibold">Dashboard</h2>
       </div>
-      <div className="pt-5 pb-24 px-3 flex flex-col items-center">
+      <div className="pt-5 pb-24 px-3 flex flex-col items-center w-[100%]">
         <div className="flex flex-wrap justify-between items-center  gap-10">
           <Container
             percent={0.02}
@@ -55,6 +56,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
+      <Chart />
     </>
   );
 };
