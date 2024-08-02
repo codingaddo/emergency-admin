@@ -17,6 +17,11 @@ interface TransformedData {
   count: number;
 }
 
+interface PieChartData {
+  name: string;
+  value: number;
+}
+
 export const transformLineChartData = (reports: Report[]) => {
   const dateCountMap: { [key: string]: number } = {};
 
@@ -31,29 +36,20 @@ export const transformLineChartData = (reports: Report[]) => {
   }));
 };
 
-export const transformPieChartData = (reports: Report[]) => {
-  const typeCountMap: { [key: string]: number } = {
-    Fire: 0,
-    Crime: 0,
-    Medical: 0,
-    Others: 0,
-  };
+export const transformPieChartDataByMonth = (
+  reports: Report[]
+): PieChartData[] => {
+  const monthCountMap: { [key: string]: number } = {};
 
   reports.forEach((report) => {
-    if (report.agency === "fire") {
-      typeCountMap.Fire += 1;
-    } else if (report.agency === "police") {
-      typeCountMap.Crime += 1;
-    } else if (report.agency === "ambulance") {
-      typeCountMap.Medical += 1;
-    } else {
-      typeCountMap.Others += 1;
-    }
+    const date = parseISO(report.createdAt);
+    const month = format(date, "MMMM yyyy");
+    monthCountMap[month] = (monthCountMap[month] || 0) + 1;
   });
 
-  return Object.entries(typeCountMap).map(([type, count]) => ({
-    type,
-    count,
+  return Object.entries(monthCountMap).map(([name, value]) => ({
+    name,
+    value,
   }));
 };
 

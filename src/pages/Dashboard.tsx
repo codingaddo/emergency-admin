@@ -5,6 +5,7 @@ import { MdDashboard, MdToday } from "react-icons/md";
 import { HiUsers } from "react-icons/hi2";
 import { CgViewMonth } from "react-icons/cg";
 import Chart from "../features/dashboard/Chart";
+import Pichart from "../features/dashboard/MyPieChart";
 
 const Dashboard = () => {
   return (
@@ -56,7 +57,10 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <Chart />
+      <div>
+        <Chart />
+        <Pichart />
+      </div>
     </>
   );
 };

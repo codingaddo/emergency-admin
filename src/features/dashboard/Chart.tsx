@@ -9,10 +9,11 @@ import {
 } from "recharts";
 import { sampleReports } from "../../helpers/sampleData";
 import { transformAreaChartDataByMonth } from "../../helpers/transformData";
+import MyPieChart from "./MyPieChart";
 const Chart = () => {
   const reports = transformAreaChartDataByMonth(sampleReports);
   return (
-    <div>
+    <div className="sm:pb-24 pb-5">
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={reports}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -27,6 +28,7 @@ const Chart = () => {
           />
         </AreaChart>
       </ResponsiveContainer>
+      <MyPieChart />
     </div>
   );
 };
