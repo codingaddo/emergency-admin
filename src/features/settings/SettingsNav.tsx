@@ -12,16 +12,16 @@ const SettingsNav = () => {
         <h2 className="text-xl text-blue-950">Menu</h2>
       </div>
       <div className="flex justify-around bg-blue-950">
-        <NavLinks to="" name="All Agents">
+        <NavLinks to="all-agents" name="All Agents">
           <FaUserLarge color="#f0f8ff" />
         </NavLinks>
-        <NavLinks to="add" name="Add Agents">
+        <NavLinks to="add-agent" name="Add Agents">
           <FaPlusCircle color="#f0f8ff" />
         </NavLinks>
-        <NavLinks to="edit" name="Edit Agents">
+        <NavLinks to="edit-agent" name="Edit Agents">
           <MdOutlineEdit color="#f0f8ff" />
         </NavLinks>
-        <NavLinks to="del" name="Remove Agents">
+        <NavLinks to="remove-agent" name="Remove Agents">
           <MdDelete color="#f0f8ff" />
         </NavLinks>
       </div>
