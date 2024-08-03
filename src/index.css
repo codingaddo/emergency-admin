@@ -33,6 +33,10 @@
   overflow: auto;
 }
 
-.active {
+.nav.active {
   background-color: #f0f8ff;
+}
+
+.nav-set.active {
+  background-color: #2e4d64;
 }

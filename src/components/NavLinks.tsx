@@ -9,10 +9,12 @@ const NavLinks = ({ to, name, children }: LinkProps) => {
   return (
     <NavLink
       to={to}
-      className="flex items-center text-center hover:bg-[#f0f8ff] w-[250px] gap-5 pl-14  p-[8px] rounded-l-full "
+      className=" nav flex items-center  text-center hover:bg-[#f0f8ff] w-[250px] gap-1 pl-14  p-[8px] rounded-l-full "
     >
       {children}
-      <span className="text-[17px] text-blue-950 font-semibold">{name}</span>
+      <span className="text-[18px] text-end text-blue-950 font-semibold">
+        {name}
+      </span>
     </NavLink>
   );
 };

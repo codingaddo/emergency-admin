@@ -6,17 +6,18 @@ import { HiUsers } from "react-icons/hi2";
 import { CgViewMonth } from "react-icons/cg";
 import Chart from "../features/dashboard/Chart";
 import Pichart from "../features/dashboard/MyPieChart";
+import ChartLayout from "../ui/ChartLayout";
 
 const Dashboard = () => {
   return (
-    <>
-      <div className="flex items-center py-5 gap-2 px-10 ">
+    <div className="sm:pb-10">
+      <div className="flex items-center pt-5 gap-2 px-10 ">
         <div className="p-1 bg-blue-100 rounded-lg">
           <MdDashboard size={22} />
         </div>
-        <h2 className="text-2xl font-semibold">Dashboard</h2>
+        <h2 className="text-2xl font-semibold uppercase">Dashboard</h2>
       </div>
-      <div className="pt-5 pb-24 px-3 flex flex-col items-center w-[100%]">
+      <div className="pt-5 md:pb-10 px-3 flex flex-col items-center w-[100%]">
         <div className="flex flex-wrap justify-between items-center  gap-10">
           <Container
             percent={0.02}
@@ -57,11 +58,11 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div>
+      <ChartLayout>
         <Chart />
         <Pichart />
-      </div>
-    </>
+      </ChartLayout>
+    </div>
   );
 };
 

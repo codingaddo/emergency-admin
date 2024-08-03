@@ -26,7 +26,7 @@ export const transformLineChartData = (reports: Report[]) => {
   const dateCountMap: { [key: string]: number } = {};
 
   reports.forEach((report) => {
-    const date = format(new Date(report.createdAt), "yyyy-MM-dd");
+    const date = format(new Date(report.createdAt), "yyyy-MM");
     dateCountMap[date] = (dateCountMap[date] || 0) + 1;
   });
 
@@ -43,7 +43,7 @@ export const transformPieChartDataByMonth = (
 
   reports.forEach((report) => {
     const date = parseISO(report.createdAt);
-    const month = format(date, "MMMM yyyy");
+    const month = format(date, "MMM ");
     monthCountMap[month] = (monthCountMap[month] || 0) + 1;
   });
 
@@ -69,7 +69,7 @@ export const transformAreaChartDataByMonth = (
     .map(([month, count]) => {
       // Convert "yyyy-MM" to "Month YYYY" format
       const [year, monthNumber] = month.split("-");
-      const monthName = format(new Date(`${year}-${monthNumber}-01`), "MMM yy");
+      const monthName = format(new Date(`${year}-${monthNumber}-01`), "MMM ");
 
       return {
         month: monthName,

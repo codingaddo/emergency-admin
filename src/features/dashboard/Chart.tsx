@@ -9,16 +9,16 @@ import {
 } from "recharts";
 import { sampleReports } from "../../helpers/sampleData";
 import { transformAreaChartDataByMonth } from "../../helpers/transformData";
-import MyPieChart from "./MyPieChart";
 const Chart = () => {
   const reports = transformAreaChartDataByMonth(sampleReports);
   return (
-    <div className="sm:pb-24 pb-5">
+    <>
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={reports}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
+          {/* <YAxis domain={[0, "dataMax + 1"]} /> */}
           <Tooltip />
           <Area
             type="monotone"
@@ -28,8 +28,7 @@ const Chart = () => {
           />
         </AreaChart>
       </ResponsiveContainer>
-      <MyPieChart />
-    </div>
+    </>
   );
 };
 
