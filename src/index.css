@@ -15,6 +15,26 @@
   overflow: hidden;
 }
 
+.bg-img {
+  background-image: url("./assets/login-bg.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
 .main {
   width: 100%;
   height: inherit;
@@ -39,4 +59,25 @@
 
 .nav-set.active {
   background-color: #2e4d64;
+}
+
+.spinner {
+  margin: 4.8rem auto;
+
+  width: 6.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #6366f1 94%, #0000) top/10px 10px
+      no-repeat,
+    conic-gradient(#0000 30%, #4f46e5);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+
+  animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
 }

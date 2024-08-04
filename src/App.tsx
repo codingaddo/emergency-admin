@@ -7,8 +7,10 @@ import Stat from "./pages/Stat";
 import Settings from "./pages/Settings";
 import AddAgents from "./pages/AddAgents";
 import AllAgents from "./pages/AllAgents";
-import EditAgent from "./pages/EditAgent";
-import RemoveAgent from "./pages/RemoveAgent";
+import UserDetails from "./pages/UserDetails";
+import PageNotFound from "./pages/PageNotFound";
+import Login from "./pages/Login";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 function App() {
   const queryClient = new QueryClient({
@@ -23,9 +25,14 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Navigate replace to={"dashboard"} />} />
-
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="complaints" element={<Complaints />} />
               <Route path="stat" element={<Stat />} />
@@ -33,10 +40,11 @@ function App() {
                 <Route index element={<Navigate replace to={"all-agents"} />} />
                 <Route path="all-agents" element={<AllAgents />} />
                 <Route path="add-agent" element={<AddAgents />} />
-                <Route path="edit-agent" element={<EditAgent />} />
-                <Route path="remove-agent" element={<RemoveAgent />} />
+                <Route path="user-details/:userId" element={<UserDetails />} />
               </Route>
             </Route>
+            <Route path="*" element={<PageNotFound />} />
+            <Route path="login" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
