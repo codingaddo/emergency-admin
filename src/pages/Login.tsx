@@ -20,14 +20,17 @@ const Login = () => {
 
   const navigate = useNavigate();
   const onSubmit = (values: object) => {
+    navigate("/dashboard", { replace: true });
     login(values as LoginRequest, {
       onSuccess: (data) => {
         console.log(data);
-        navigate("/dashboard");
+        alert("Success");
       },
       onError: (error) => {
         console.error("Error during login:", error);
+        alert("Invalid user name or password");
       },
+
       onSettled: () => {
         console.log("login settled");
       },

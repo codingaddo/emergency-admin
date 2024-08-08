@@ -8,7 +8,7 @@ const getUser = async () => {
     throw new Error("No token or user data found");
   }
 
-  return JSON.parse(user); // Parse user data from local storage
+  return JSON.parse(user);
 };
 
 export const useAuth = () => {
@@ -17,10 +17,9 @@ export const useAuth = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["user"], // React Query v5 uses `queryKey` instead of the positional parameter
+    queryKey: ["user"],
     queryFn: getUser,
-    // cacheTime: 10 * 60 * 1000, // Cache time in milliseconds (10 minutes)
-    staleTime: 0, // Data is considered stale immediately
+    staleTime: 0,
   });
 
   return { user, isLoading, isError };

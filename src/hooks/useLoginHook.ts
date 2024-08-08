@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { login } from "../services/apitAuth";
 import { setUser } from "../features/slices/userSlice";
 import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 
 interface LoginRequest {
   username: string;
@@ -9,6 +10,7 @@ interface LoginRequest {
 }
 
 export const useLogin = () => {
+  // const navigate = useNavigate();
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const { mutate, isPending, error } = useMutation({
@@ -22,6 +24,8 @@ export const useLogin = () => {
     },
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user);
+      // navigate("/", { replace: true });
+
       console.log(user);
       return user;
     },

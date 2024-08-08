@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/getUser";
+import toast from "react-hot-toast";
 
 export interface User {
   id: string;
@@ -24,6 +25,12 @@ function ProtectedRoute({ children }: ProtectProps) {
     function () {
       if (!user && !isLoading) {
         navigete("/login");
+        alert("Invalid user name or password");
+      }
+      if (user && user?.data?.user.role !== "admin") {
+        toast.error("You dont have permission");
+        alert("You don not have permission ");
+        navigete("/login");
       }
     },
     [user, isLoading, navigete]
@@ -45,8 +52,8 @@ function ProtectedRoute({ children }: ProtectProps) {
     );
 
   //4. If there is an authenticated user render the app
-  if (user?.data?.user.role !== "admin")
-    return <h1>You don't have access to this resouce</h1>;
+
+  // navigete("/login");
   if (user?.data?.user?.role === "admin") return children;
 }
 
