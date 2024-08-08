@@ -17,7 +17,7 @@ const Container = ({
 }: PropInterface) => {
   return (
     <div
-      className={`rounded-lg hover:shadow-lg shadow bg-blue-50 cursor-pointer flex flex-col items-center justify-between pb-4 pt-7 px-5 h-32 w-64`}
+      className={`rounded-lg hover:shadow-lg shadow bg-blue-50 cursor-pointer flex flex-col items-center justify-between pb-4 pt-7 px-5 h-32 w-52`}
     >
       <div className="flex items-center gap-16 ">
         <p className="text-lg font-normal">

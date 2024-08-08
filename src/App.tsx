@@ -11,6 +11,7 @@ import UserDetails from "./pages/UserDetails";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import ComplainDetails from "./pages/ComplainDetails";
 
 function App() {
   const queryClient = new QueryClient({
@@ -34,8 +35,17 @@ function App() {
             >
               <Route index element={<Navigate replace to={"dashboard"} />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="complaints" element={<Complaints />} />
               <Route path="stat" element={<Stat />} />
+
+              <Route path="complaints" element={<Complaints />}>
+                <Route index element={<Navigate replace to={"complaints"} />} />
+                <Route path="complaints" element={<Complaints />} />
+                <Route
+                  path="report-details/:reportId"
+                  element={<ComplainDetails />}
+                />
+              </Route>
+
               <Route path="settings" element={<Settings />}>
                 <Route index element={<Navigate replace to={"all-agents"} />} />
                 <Route path="all-agents" element={<AllAgents />} />
