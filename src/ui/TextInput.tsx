@@ -18,6 +18,7 @@ const TextInput = ({
   rules,
   title,
   error,
+  type,
   register,
 }: InputProps) => {
   return (
@@ -29,7 +30,7 @@ const TextInput = ({
         {label}
       </label>
       <input
-        type="text"
+        type={type || "text"}
         id={title}
         placeholder={placeholder}
         {...register(title, rules)}

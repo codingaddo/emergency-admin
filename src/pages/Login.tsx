@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import TextInput from "../ui/TextInput";
 import FormBtn from "../ui/FormBtn";
+import { useLogin } from "../hooks/useLoginHook";
+import { LoginRequest } from "../services/apitAuth";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const {
     register,
@@ -13,8 +16,22 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data: object) => {
-    console.log(data);
+  const { mutate: login, isPending } = useLogin();
+
+  const navigate = useNavigate();
+  const onSubmit = (values: object) => {
+    login(values as LoginRequest, {
+      onSuccess: (data) => {
+        console.log(data);
+        navigate("/dashboard");
+      },
+      onError: (error) => {
+        console.error("Error during login:", error);
+      },
+      onSettled: () => {
+        console.log("login settled");
+      },
+    });
   };
   return (
     <div className="bg-img">
@@ -34,6 +51,7 @@ const Login = () => {
               title="email"
               placeholder="email"
               error={errors.email}
+              type="email"
             />
             <TextInput
               register={register}
@@ -43,7 +61,10 @@ const Login = () => {
               type="password"
               error={errors.password}
             />
-            <FormBtn label="Login" disable={false} />
+            <FormBtn
+              label={isPending ? "loading..." : "Login"}
+              disable={isPending}
+            />
           </form>
         </div>
       </div>
