@@ -12,6 +12,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import ComplainDetails from "./pages/ComplainDetails";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const queryClient = new QueryClient({
@@ -57,6 +58,24 @@ function App() {
             <Route path="login" element={<Login />} />
           </Routes>
         </BrowserRouter>
+        <Toaster
+          position="top-right"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+            },
+          }}
+        />
       </QueryClientProvider>
     </>
   );

@@ -16,11 +16,12 @@ export const useAuth = () => {
     data: user,
     isLoading,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
     staleTime: 0,
   });
 
-  return { user, isLoading, isError };
+  return { user, isLoading, isError, refetch };
 };
