@@ -1,7 +1,9 @@
 const ComplaintNav = () => {
   return (
-    <div className="flex justify-between items-center">
-      <h2 className="text-lg font-semibold text-blue-950">All Reports</h2>
+    <div className="flex sm:flex-col  md:flex-row justify-between items-center">
+      <h2 className="md:text-lg sm:text-2xl font-semibold text-blue-950">
+        All Reports
+      </h2>
       <div className="flex  gap-2 py-3 ">
         <Button name="All" onclick={() => console.log("hello")} active={true} />
         <Button

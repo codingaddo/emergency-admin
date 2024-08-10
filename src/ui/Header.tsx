@@ -1,9 +1,8 @@
-import { MdLogout } from "react-icons/md";
+import Logout from "../features/complaints/Logout";
+import ToggleMenu from "../features/complaints/ToggleMenu";
 import { useAuth } from "../hooks/getUser";
-import { useLogout } from "../hooks/useLogout";
 const Header = () => {
   const user = useAuth();
-  const { logoutFn, isLoading } = useLogout();
   const username = user.user.data.user.name;
 
   return (
@@ -11,20 +10,12 @@ const Header = () => {
       <h1 className="text-gray-900 font-medium">
         @Admin: <span>{username}</span>
       </h1>
-      <button
-        onClick={() => logoutFn()}
-        disabled={isLoading}
-        className="flex items-center justify-center gap-2 bg-[#f0f8ff] p-2 rounded-lg px-4 hover:bg-[#deefff] shadow-md transition-all duration-300"
-      >
-        {isLoading ? (
-          "logging out..."
-        ) : (
-          <>
-            <span>Logout</span>
-            <MdLogout />
-          </>
-        )}
-      </button>
+      <div className="sm:hidden lg:block">
+        <Logout />
+      </div>
+      <div className="lg:hidden sm:block">
+        <ToggleMenu />
+      </div>
     </div>
   );
 };

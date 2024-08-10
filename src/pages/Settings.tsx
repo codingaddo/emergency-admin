@@ -33,7 +33,8 @@ const Settings = () => {
           <h1>Agent Info</h1>
         )}
       </div>
-      {!location.pathname.includes("user-details") && <Search />}
+      {!location.pathname.includes("user-details") &&
+        !location.pathname.includes("add-agent") && <Search />}
       <div>
         <Outlet />
       </div>

@@ -17,8 +17,8 @@ const Dashboard = () => {
         </div>
         <h2 className="text-2xl font-semibold uppercase">Dashboard</h2>
       </div>
-      <div className="pt-5 md:pb-10 px-3 flex flex-col items-center w-[100%]">
-        <div className="flex flex-wrap justify-between items-center  gap-10">
+      <div className="pt-5 md:pb-10 sm:pb-10 px-3 flex flex-col items-center w-[100%]">
+        <div className="flex flex-wrap justify-between sm:justify-center w-[100%] lg:items-start sm:items-center  gap-10">
           <Container
             percent={0.02}
             title="Total"

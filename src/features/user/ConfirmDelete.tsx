@@ -27,7 +27,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose }) => {
   //   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-7 h-[280px]">
+    <div className="flex flex-col items-center justify-center gap-7 h-[280px] max-w-[100%]">
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-2xl font-semibold">
           Are you sure you want to delete

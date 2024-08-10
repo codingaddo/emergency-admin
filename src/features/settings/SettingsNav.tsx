@@ -30,7 +30,7 @@ const NavLinks = ({ to, name, children }: LinkProps) => {
   return (
     <NavLink
       to={to}
-      className=" nav-set flex items-center  text-center border-x hover:bg-[#2e4d64] w-[100%] gap-1 pl-14  p-[8px]"
+      className=" nav-set flex items-center  text-center border-x hover:bg-[#2e4d64] w-[100%] gap-1 justify-center  p-[8px]"
     >
       {children}
       <span className="text-[16px] text-end text-[#f0f8ff] font-semibold">

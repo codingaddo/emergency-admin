@@ -7,13 +7,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-.applayout {
-  display: grid;
-  grid-template-columns: 16rem 1fr;
-  grid-template-rows: auto 1fr auto;
-  height: 100vh;
-  overflow: hidden;
-}
 
 .bg-img {
   background-image: url("./assets/login-bg.png");
@@ -33,6 +26,14 @@
   align-items: center;
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
+}
+
+.applayout {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .main {
@@ -92,4 +93,33 @@ button:disabled:hover {
   cursor: not-allowed;
   opacity: 0.4;
   background-color: gray;
+}
+
+@media (max-width: 868px) {
+  .applayout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .sideBar {
+    position: absolute;
+    top: 74px;
+    overflow-x: hidden;
+    height: 85%;
+    transition: all 500ms;
+    z-index: 9999;
+    /* display: none; */
+  }
+
+  .hide {
+    left: -100%;
+    transition: all 500ms;
+  }
+
+  .show {
+    left: 0%;
+    transition: all 500ms;
+  }
 }

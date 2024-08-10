@@ -49,7 +49,7 @@ const MyPieChart = () => {
             verticalAlign="middle"
             align="right"
             width={90}
-            layout="vertical"
+            layout="horizontal"
             iconSize={12}
             iconType="circle"
           />

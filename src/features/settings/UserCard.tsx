@@ -19,7 +19,7 @@ const UserCard = ({ userName, onDelete, onEdit }: UserCardProps) => {
           <h2>{userName}</h2>
         </div>
 
-        <div className="flex gap-2 py-2">
+        <div className="flex gap-2 sm:gap-4 py-2">
           <NavLink
             to={`/settings/user-details/${11}`}
             className="flex items-center cursor-pointer"

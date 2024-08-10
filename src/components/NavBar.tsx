@@ -1,23 +1,31 @@
 import NavLink from "./NavLinks";
 import { MdDashboard } from "react-icons/md";
-import { IoMdStats } from "react-icons/io";
+// import { IoMdStats } from "react-icons/io";
 import { FaGear } from "react-icons/fa6";
 import { IoMdNotifications } from "react-icons/io";
+import { MdTipsAndUpdates } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { toggleShow } from "../features/slices/modalSlice";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+  const handleToggle = () => {
+    dispatch(toggleShow());
+  };
+
   return (
     <div className="flex flex-col items-center gap-1">
-      <NavLink to="dashboard" name="Dashboard">
-        <MdDashboard size={25} />
+      <NavLink to="dashboard" name="Dashboard" onClick={handleToggle}>
+        <MdDashboard size={22} />
       </NavLink>
-      <NavLink to="complaints" name="Complaints">
-        <IoMdNotifications size={25} />
+      <NavLink to="complaints" name="Complaints" onClick={handleToggle}>
+        <IoMdNotifications size={26} />
       </NavLink>
-      <NavLink to="stat" name="Statistics">
-        <IoMdStats size={25} />
+      <NavLink to="settings" name="Settings" onClick={handleToggle}>
+        <FaGear size={21} />
       </NavLink>
-      <NavLink to="settings" name="Settings">
-        <FaGear size={25} />
+      <NavLink to="help" name="Help and Tips" onClick={handleToggle}>
+        <MdTipsAndUpdates size={25} />
       </NavLink>
     </div>
   );
