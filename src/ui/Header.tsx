@@ -1,18 +1,29 @@
-import { RootState } from "../store";
 import { MdLogout } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useAuth } from "../hooks/getUser";
+import { useLogout } from "../hooks/useLogout";
 const Header = () => {
-  const { user, loading } = useSelector((store: RootState) => store.user);
+  const user = useAuth();
+  const { logoutFn, isLoading } = useLogout();
+  const username = user.user.data.user.name;
 
-  const name = user?.data?.user?.name || "Admin";
   return (
     <div className="header bg-gray-200 p-5 flex justify-between items-center px-5 shadow-lg">
       <h1 className="text-gray-900 font-medium">
-        @Admin: <span>{name}</span>
+        @Admin: <span>{username}</span>
       </h1>
-      <button className="flex items-center justify-center gap-2 bg-[#f0f8ff] p-2 rounded-lg px-4 hover:bg-[#deefff] shadow-md transition-all duration-300">
-        <span>Logout</span>
-        <MdLogout />
+      <button
+        onClick={() => logoutFn()}
+        disabled={isLoading}
+        className="flex items-center justify-center gap-2 bg-[#f0f8ff] p-2 rounded-lg px-4 hover:bg-[#deefff] shadow-md transition-all duration-300"
+      >
+        {isLoading ? (
+          "logging out..."
+        ) : (
+          <>
+            <span>Logout</span>
+            <MdLogout />
+          </>
+        )}
       </button>
     </div>
   );

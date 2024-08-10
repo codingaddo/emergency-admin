@@ -21,3 +21,11 @@ export const login = async (loginData: LoginRequest) => {
     throw new Error("Failed to login");
   }
 };
+
+export const logout = async () => {
+  try {
+    await api.get("/users/logout");
+  } catch (error) {
+    throw new Error("Failed to logout");
+  }
+};
