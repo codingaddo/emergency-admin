@@ -11,7 +11,9 @@ const FormBtn = ({ label, disable, onClick, del }: BtnForm) => {
         onClick={onClick}
         disabled={disable}
         className={`w-32 shadow rounded-md ${
-          del ? "bg-red-500 hover:bg-red-700" : "bg-blue-950 hover:bg-[#2e4d64]"
+          del === true
+            ? "bg-red-500 hover:bg-red-700"
+            : "bg-blue-950 hover:bg-[#2e4d64]"
         }  text-white py-2 font-medium  transition-all duration-300`}
       >
         {label}

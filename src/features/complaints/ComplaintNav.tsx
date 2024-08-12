@@ -33,7 +33,7 @@ const Button = ({ name, onclick, active }: LinkProps) => {
     <button
       onClick={onclick}
       className={`text-center text-slate-50 ${
-        active === true ? "bg-blue-900" : "bg-blue-950 "
+        active === true ? " bg-slate-500 " : "bg-blue-950 "
       } bg-blue-950 rounded-lg  hover:bg-[#2e4d64] w-[100px]  p-[8px]`}
     >
       {name}

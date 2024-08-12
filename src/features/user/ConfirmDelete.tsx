@@ -38,7 +38,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose }) => {
       </div>
       <div className="flex gap-10">
         <FormBtn label="Cancel" disable={false} onClick={onClose} />
-        <FormBtn del label="Delete" disable={false} onClick={onClose} />
+        <FormBtn del={true} label="Delete" disable={false} onClick={onClose} />
       </div>
     </div>
   );

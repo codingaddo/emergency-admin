@@ -15,10 +15,11 @@ const Complaints = () => {
     <div className="px-5 flex flex-col gap-5">
       <ComplaintNav />
       <NavLink
-        to={"report-details/:12"}
+        to={"report-details/12"}
         className="flex flex-col gap-2 shadow rounded-md px-4 py-5 cursor-pointer hover:bg-slate-200"
         title="preview"
       >
+        <ComplaintContainer label="Id#" text="124532589554" />
         <ComplaintContainer label="Description" text="They stole my car" />
         <ComplaintContainer label="Sender name" text="Addo Michael" />
         <ComplaintContainer label="Location" text="Sunyani Fiapre" />
@@ -29,6 +30,7 @@ const Complaints = () => {
         className="flex flex-col gap-2 shadow rounded-md px-4 py-5 cursor-pointer hover:bg-slate-200"
         title="preview"
       >
+        <ComplaintContainer label="Id#" text="124532589554" />
         <ComplaintContainer label="Description" text="They stole my car" />
         <ComplaintContainer label="Sender name" text="Addo Michael" />
         <ComplaintContainer label="Location" text="Sunyani Fiapre" />
