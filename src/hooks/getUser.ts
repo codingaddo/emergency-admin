@@ -5,7 +5,7 @@ const getUser = async () => {
   const user = localStorage.getItem("user");
 
   if (!token || !user) {
-    throw new Error("No token or user data found");
+    throw new Error("No user data found");
   }
 
   return JSON.parse(user);
@@ -20,7 +20,6 @@ export const useAuth = () => {
   } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
-    staleTime: 0,
   });
 
   return { user, isLoading, isError, refetch };

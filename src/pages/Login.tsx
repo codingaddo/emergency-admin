@@ -27,7 +27,9 @@ const Login = () => {
         <div className="bg-img">
           <div className="content px-5">
             <div className="bg-[#f1f1f8]  flex gap-5 flex-col justify-center items-center h-[350px] py-14 px-16 rounded-lg shadow">
-              <h1 className="text-blue-950 text-2xl font-semibold">Login</h1>
+              <h1 className="text-blue-950 text-2xl font-semibold">
+                Admin Login
+              </h1>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <TextInput
                   register={register}
