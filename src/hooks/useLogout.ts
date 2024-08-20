@@ -13,6 +13,7 @@ export const useLogout = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       queryClient.removeQueries();
+      toast.success("Logged out successfully");
       navigate("/login", { replace: true });
     },
     onError: () => {

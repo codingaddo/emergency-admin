@@ -9,6 +9,19 @@ import Pichart from "../features/dashboard/MyPieChart";
 import ChartLayout from "../ui/ChartLayout";
 
 const Dashboard = () => {
+  // if ("Notification" in window && Notification.permission === "granted") {
+  //   new Notification("Test Notification", {
+  //     body: "This is a test notification.",
+  //   });
+  // } else {
+  //   Notification.requestPermission().then((permission) => {
+  //     if (permission === "granted") {
+  //       new Notification("Test Notification", {
+  //         body: "This is a test notification.",
+  //       });
+  //     }
+  //   });
+  // }
   return (
     <div className="sm:pb-10">
       <div className="flex items-center pt-5 gap-2 px-10 ">

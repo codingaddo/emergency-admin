@@ -28,7 +28,8 @@ export const useLogin = () => {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", user.token);
         queryClient.setQueryData(["user"], user);
-        navigate("/", { replace: true });
+        toast.success("Logged in successfully");
+        navigate("/dashboard", { replace: true });
         return user;
       }
     },

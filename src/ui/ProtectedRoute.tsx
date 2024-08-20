@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/getUser";
 import AppLoader from "./AppLoader";
 
@@ -14,12 +15,17 @@ interface ProtectProps {
 function ProtectedRoute({ children }: ProtectProps) {
   const { user, isLoading } = useAuth();
   const isAuthenticated = user?.data?.user?.role === "admin";
+  const navigate = useNavigate();
 
   //1. Show a spinner while loading the user
   if (isLoading) return <AppLoader />;
 
-  //2. If there is an authenticated user render the app
+  if (!user) {
+    navigate("/login", { replace: true });
+    return;
+  }
 
+  //2. If there is an authenticated user render the app
   if (!isLoading && isAuthenticated) return children;
 
   return null;

@@ -6,6 +6,7 @@ export const useGetReports = () => {
     data: reports,
     isLoading,
     refetch,
+    error,
   } = useQuery({
     queryKey: ["reports"],
     queryFn: () => getReports(),
@@ -15,5 +16,6 @@ export const useGetReports = () => {
     reports,
     isLoading,
     refetch,
+    error,
   };
 };

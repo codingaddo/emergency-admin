@@ -13,8 +13,13 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import ComplainDetails from "./pages/ComplainDetails";
 import { Toaster } from "react-hot-toast";
+import { requestNotificationPermission } from "./features/complaints/notification";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
