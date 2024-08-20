@@ -2,15 +2,20 @@
 import React from "react";
 // import { useMutation, useQueryClient } from 'react-query';
 import FormBtn from "../../ui/FormBtn";
+import { useDeleteReport } from "../../hooks/useDeleteReports";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 interface ConfirmDeleteProps {
-  //   userId: number;
+  id: string;
   //   username: string;
   onClose: () => void;
 }
 
-const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose }) => {
-  //   const queryClient = useQueryClient();
+const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose, id }) => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { isDeleting, mutate } = useDeleteReport();
 
   //   const mutation = useMutation({
   //     mutationFn: async () => {
@@ -22,9 +27,11 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose }) => {
   //     },
   //   });
 
-  //   const handleDelete = () => {
-  //     mutation.mutate();
-  //   };
+  const handleDelete = () => {
+    mutate(id);
+    queryClient.invalidateQueries();
+    onClose();
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-7 h-[280px] max-w-[100%]">
@@ -38,7 +45,12 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose }) => {
       </div>
       <div className="flex gap-10">
         <FormBtn label="Cancel" disable={false} onClick={onClose} />
-        <FormBtn del={true} label="Delete" disable={false} onClick={onClose} />
+        <FormBtn
+          del={true}
+          label="Delete"
+          disable={isDeleting}
+          onClick={handleDelete}
+        />
       </div>
     </div>
   );

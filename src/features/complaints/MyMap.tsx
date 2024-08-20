@@ -4,7 +4,7 @@ import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { CgDanger } from "react-icons/cg";
-import { formatTime } from "../../helpers/formatTime";
+// import { formatTime } from "../../helpers/formatTime";
 import { CreateCustomIcon as createCustomIcon } from "./CreateCustomIcon";
 import { haversineDistance } from "../../helpers/culculateDistance";
 import { RecenterMap } from "./RecenterMap";
@@ -86,7 +86,10 @@ const MyMap: React.FC<MapComponentProps> = ({ destination }) => {
         <Polyline positions={positions} color="blue" />
       </MapContainer>
       {timeToDestination !== null && (
-        <p>Estimated time to destination: {formatTime(timeToDestination)}</p>
+        <p>
+          Estimated time to destination:
+          {/* {formatTime(timeToDestination)} */}
+        </p>
       )}
     </div>
   );

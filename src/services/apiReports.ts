@@ -22,7 +22,7 @@ export const deleteReport = async (id: string) => {
     if (token) {
       API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
-    await API.get(`/deleteReport/:${id}`, {
+    await API.delete(`/deleteReport/${id}`, {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {

@@ -39,11 +39,18 @@ const ComplainPreview = ({ report }) => {
     lng: -0.187,
   };
 
+  const senderCoordinate = {
+    lat: report?.coordinates[0],
+    lng: report?.coordinates[1],
+  };
+
+  console.log(report?.coordinates);
+
   const handleDelete = () => {
     dispatch(
       openModal(
         <>
-          <ConfirmDelete onClose={close} />
+          <ConfirmDelete onClose={close} id={report._id} />
         </>
       )
     );
@@ -95,10 +102,15 @@ const ComplainPreview = ({ report }) => {
       <Modal isOpen={isModalOpen} onClose={close}>
         {modalContent}
       </Modal>
-
-      <div className=" sm:h-[80vh] lg:h-[80vh]">
-        <MyMap destination={destination} />
-      </div>
+      {report?.coordinates.length !== 0 ? (
+        <div className=" sm:h-[80vh] lg:h-[80vh]">
+          <MyMap destination={senderCoordinate || destination} />
+        </div>
+      ) : (
+        <p className="text-center text-2xl text-blue-950">
+          No coordinates provided.
+        </p>
+      )}
     </div>
   );
 };
