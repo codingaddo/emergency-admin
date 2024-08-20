@@ -15,3 +15,17 @@ export const getReports = async () => {
     throw new Error("Failed to fetch reports");
   }
 };
+
+export const deleteReport = async (id: string) => {
+  try {
+    const token = await localStorage.getItem("token");
+    if (token) {
+      API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    await API.get(`/deleteReport/:${id}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    throw new Error("Failed to delete");
+  }
+};

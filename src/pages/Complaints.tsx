@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import ComplaintContainer from "../features/complaints/ComplaintContainer";
 import ComplaintNav from "../features/complaints/ComplaintNav";
 import { useGetReports } from "../hooks/useGetReports";
@@ -12,6 +12,7 @@ const array = [1, 2, 3, 4, 5];
 const Complaints = () => {
   const location = useLocation();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { reports, isLoading, error } = useGetReports();
 
   // useEffect(() => {
@@ -66,9 +67,14 @@ const Complaints = () => {
           ? array.map((item, index) => <Loading key={index} />)
           : // <div className="spinner"></div>
             reports?.data?.map((report) => (
-              <NavLink
+              <div
+                onClick={() =>
+                  navigate(`/complaints/report-details/${report._id}`, {
+                    state: { report },
+                  })
+                }
                 key={report._id}
-                to={`report-details/${report._id}`}
+                // to={`report-details/${report._id}`}
                 className="flex flex-col gap-2 shadow rounded-md px-4 py-5 cursor-pointer hover:bg-slate-200"
                 title="preview"
               >
@@ -86,7 +92,7 @@ const Complaints = () => {
                   text={report.locationName || "N/A"}
                 />
                 <ComplaintContainer label="Status" text={report.status} />
-              </NavLink>
+              </div>
             ))
         // <p>Data has arrived</p>
       }

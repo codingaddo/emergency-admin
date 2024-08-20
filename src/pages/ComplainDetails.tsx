@@ -1,9 +1,16 @@
 import { IoMdArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ComplainPreview from "../features/complaints/ComplainPreview";
 
 const ComplainDetails = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const { report } = state || {};
+  // const { id } = useParams<{ id: string }>();
+
+  if (report) {
+    console.log("Report details:", report);
+  }
   return (
     <div className="flex flex-col px-5">
       <div className="flex items-center justify-between  py-4">
@@ -17,7 +24,7 @@ const ComplainDetails = () => {
         </span>
       </div>
       <div>
-        <ComplainPreview />
+        <ComplainPreview report={report} />
       </div>
     </div>
   );
