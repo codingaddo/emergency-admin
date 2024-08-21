@@ -22,10 +22,11 @@ export const deleteReport = async (id: string) => {
     if (token) {
       API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
-    await API.delete(`/deleteReport/${id}`, {
+    await API.delete(`/reports/deleteReport/${id}`, {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.log(error);
     throw new Error("Failed to delete");
   }
 };

@@ -1,36 +1,25 @@
-// src/components/DeleteConfirmation.tsx
 import React from "react";
-// import { useMutation, useQueryClient } from 'react-query';
 import FormBtn from "../../ui/FormBtn";
 import { useDeleteReport } from "../../hooks/useDeleteReports";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface ConfirmDeleteProps {
   id: string;
-  //   username: string;
   onClose: () => void;
 }
 
 const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose, id }) => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { isDeleting, mutate } = useDeleteReport();
-
-  //   const mutation = useMutation({
-  //     mutationFn: async () => {
-  //       await axios.delete(`https://api.example.com/users/${userId}`);
-  //     },
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries('users');
-  //       onClose();
-  //     },
-  //   });
-
   const handleDelete = () => {
-    mutate(id);
-    queryClient.invalidateQueries();
-    onClose();
+    mutate(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries();
+        onClose();
+      },
+    });
   };
 
   return (
@@ -47,7 +36,7 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose, id }) => {
         <FormBtn label="Cancel" disable={false} onClick={onClose} />
         <FormBtn
           del={true}
-          label="Delete"
+          label={isDeleting ? "Deleting" : "Delete"}
           disable={isDeleting}
           onClick={handleDelete}
         />

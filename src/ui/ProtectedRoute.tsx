@@ -20,7 +20,7 @@ function ProtectedRoute({ children }: ProtectProps) {
   //1. Show a spinner while loading the user
   if (isLoading) return <AppLoader />;
 
-  if (!user || !isLoading) {
+  if (!isAuthenticated) {
     navigate("/login", { replace: true });
     return;
   }
