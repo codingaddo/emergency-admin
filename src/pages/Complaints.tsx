@@ -104,6 +104,6 @@ export default Complaints;
 
 const Loading = () => {
   return (
-    <div className="flex gap-2 items-center bg-slate-400 h-60 rounded  animate-pulse w-full"></div>
+    <div className="flex gap-2 items-center bg-slate-400 h-60 rounded transition-all duration-500  animate-pulse w-full"></div>
   );
 };

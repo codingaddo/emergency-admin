@@ -1,8 +1,15 @@
+import { useGetReports } from "../../hooks/useGetReports";
+
 const ComplaintNav = () => {
+  const { reports, isLoading, error } = useGetReports();
+
   return (
     <div className="flex sm:flex-col  md:flex-row justify-between items-center">
       <h2 className="md:text-lg sm:text-2xl font-semibold text-blue-950">
-        All Reports
+        Total Reports
+        <span className="px-4 text-2xl">
+          {isLoading || error ? "" : reports?.data?.length}
+        </span>
       </h2>
       <div className="flex  gap-2 py-3 ">
         <Button name="All" onclick={() => console.log("hello")} active={true} />

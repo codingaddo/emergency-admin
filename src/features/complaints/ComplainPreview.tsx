@@ -6,6 +6,8 @@ import { closeModal, openModal } from "../slices/modalSlice";
 import ConfirmDelete from "../user/ConfirmDelete";
 import Modal from "../../components/Modal";
 import MyMap from "./MyMap";
+import { useDeleteReport } from "../../hooks/useDeleteReports";
+import { useUpdateReport } from "../../hooks/useUpdateReports";
 
 interface Sender {
   _id: string;
@@ -32,6 +34,9 @@ interface Report {
 const ComplainPreview = ({ report }) => {
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const modalContent = useSelector((state: RootState) => state.modal.content);
+  const { isDeleting, mutate: deleteFn } = useDeleteReport();
+  const { isUpdating, mutate: update } = useUpdateReport();
+
   const dispatch = useDispatch();
   const close = () => dispatch(closeModal());
   const destination = {
@@ -50,7 +55,12 @@ const ComplainPreview = ({ report }) => {
     dispatch(
       openModal(
         <>
-          <ConfirmDelete onClose={close} id={report._id} />
+          <ConfirmDelete
+            isMutating={isDeleting}
+            mutateFunction={deleteFn}
+            onClose={close}
+            id={report._id}
+          />
         </>
       )
     );
@@ -88,9 +98,9 @@ const ComplainPreview = ({ report }) => {
       </div>
       <div className="flex gap-5">
         <FormBtn
-          label="Resolved"
-          disable={false}
-          onClick={() => console.log("helo")}
+          label={isUpdating ? "Processing" : "Resolve"}
+          disable={isUpdating || report.status === "resolved"}
+          onClick={() => update(report._id)}
         />
         <FormBtn
           del={true}
@@ -102,7 +112,7 @@ const ComplainPreview = ({ report }) => {
       <Modal isOpen={isModalOpen} onClose={close}>
         {modalContent}
       </Modal>
-      {report?.coordinates.length !== 0 ? (
+      {report?.coordinates?.length !== 0 ? (
         <div className=" sm:h-[80vh] lg:h-[80vh]">
           <MyMap destination={senderCoordinate || destination} />
         </div>

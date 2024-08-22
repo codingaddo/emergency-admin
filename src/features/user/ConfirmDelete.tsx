@@ -1,22 +1,27 @@
 import React from "react";
 import FormBtn from "../../ui/FormBtn";
-import { useDeleteReport } from "../../hooks/useDeleteReports";
 import { useQueryClient } from "@tanstack/react-query";
-// import { useNavigate } from "react-router-dom";
 
 interface ConfirmDeleteProps {
   id: string;
   onClose: () => void;
+  mutateFunction: (id: string, options: object) => void;
+  isMutating: boolean;
 }
 
-const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose, id }) => {
+const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
+  onClose,
+  id,
+  isMutating,
+  mutateFunction,
+}) => {
   const queryClient = useQueryClient();
-  // const navigate = useNavigate();
-  const { isDeleting, mutate } = useDeleteReport();
-  const handleDelete = () => {
-    mutate(id, {
+  const handleAction = () => {
+    mutateFunction(id, {
       onSuccess: () => {
-        queryClient.invalidateQueries();
+        queryClient.invalidateQueries({
+          queryKey: ["reports"],
+        });
         onClose();
       },
     });
@@ -36,9 +41,9 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({ onClose, id }) => {
         <FormBtn label="Cancel" disable={false} onClick={onClose} />
         <FormBtn
           del={true}
-          label={isDeleting ? "Deleting" : "Delete"}
-          disable={isDeleting}
-          onClick={handleDelete}
+          label={isMutating ? "Processing..." : "Confirm"}
+          disable={isMutating}
+          onClick={handleAction}
         />
       </div>
     </div>

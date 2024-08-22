@@ -30,3 +30,18 @@ export const deleteReport = async (id: string) => {
     throw new Error("Failed to delete");
   }
 };
+
+export const updateReport = async (id: string) => {
+  try {
+    const token = await localStorage.getItem("token");
+    if (token) {
+      API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    }
+    await API.patch(`/reports/updateReport/${id}`, {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to update");
+  }
+};
