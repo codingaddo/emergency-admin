@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import TextInput from "../../ui/TextInput";
 import FormBtn from "../../ui/FormBtn";
-import { useCreateAgent } from "../../hooks/useCreateAgent";
+import { useEffect } from "react";
 
 interface userData {
   name: string;
@@ -9,25 +9,27 @@ interface userData {
   phone: string;
 }
 
-const AddUserForm = () => {
-  const { mutate, isPending } = useCreateAgent();
+const EditUserForm = (data) => {
   const {
     handleSubmit,
     reset,
     register,
     // getValues,
-    formState: { errors },
-  } = useForm({
-    defaultValues: { name: "", email: "", phone: "" },
-  });
+    formState: { isDirty },
+  } = useForm();
+  useEffect(() => {
+    if (data) {
+      console.log(data.data.name);
+      reset({
+        name: data.data.name,
+        email: data.data.email,
+        phone: data.data.phone,
+      });
+    }
+  }, [data, reset]);
 
-  const onSubmit = (data: userData) => {
+  const onSubmit = (data) => {
     console.log(data);
-    mutate(data, {
-      onSuccess: () => {
-        reset();
-      },
-    });
   };
   return (
     <form
@@ -37,14 +39,12 @@ const AddUserForm = () => {
       <TextInput
         register={register}
         label="Full name"
-        error={errors.name}
         title="name"
         placeholder="Agent full name"
         rules={{ required: "Agent name is required" }}
       />
       <TextInput
         register={register}
-        error={errors.email}
         label="Email"
         title="email"
         placeholder="Agent email"
@@ -58,7 +58,6 @@ const AddUserForm = () => {
       />
       <TextInput
         register={register}
-        error={errors.phone}
         label="Phone"
         title="phone"
         placeholder="Agent phone"
@@ -70,12 +69,9 @@ const AddUserForm = () => {
           // },
         }}
       />
-      <FormBtn
-        label={isPending ? "Adding agent..." : "Add"}
-        disable={isPending}
-      />
+      <FormBtn label={"Edit"} disable={!isDirty} />
     </form>
   );
 };
 
-export default AddUserForm;
+export default EditUserForm;
