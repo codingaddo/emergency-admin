@@ -178,7 +178,8 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
   }, [updateUserLocation]);
 
   const positions: LatLngExpression[] = [
-    [userLocation.lat, userLocation.lng],
+    // [userLocation.lat, userLocation.lng],
+    [7.3501398, -2.3399661],
     [destination.lat, destination.lng],
   ];
 
@@ -196,7 +197,8 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
       ) : (
         <>
           <MapContainer
-            center={[userLocation.lat, userLocation.lng]}
+            center={[7.3501398, -2.3399661]}
+            // center={[userLocation.lat, userLocation.lng]}
             zoom={13}
             style={{ height: "500px", width: "100%" }}
           >
@@ -204,9 +206,11 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            <RecenterMap lat={userLocation.lat} lng={userLocation.lng} />
+            {/* <RecenterMap lat={userLocation.lat} lng={userLocation.lng} /> */}
+            <RecenterMap lat={7.3501398} lng={-2.3399661} />
             <Marker
-              position={[userLocation.lat, userLocation.lng]}
+              // position={[userLocation.lat, userLocation.lng]}
+              position={[7.3501398, -2.3399661]}
               icon={userIcon}
             />
             <Marker
