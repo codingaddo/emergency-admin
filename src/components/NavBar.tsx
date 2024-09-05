@@ -6,8 +6,10 @@ import { IoMdNotifications } from "react-icons/io";
 import { MdTipsAndUpdates } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { toggleShow } from "../features/slices/modalSlice";
+import { useAuth } from "../hooks/getUser";
 
 const NavBar = () => {
+  const { user } = useAuth();
   const dispatch = useDispatch();
   const handleToggle = () => {
     dispatch(toggleShow());
@@ -21,9 +23,11 @@ const NavBar = () => {
       <NavLink to="complaints" name="Complaints" onClick={handleToggle}>
         <IoMdNotifications size={26} />
       </NavLink>
-      <NavLink to="settings" name="Settings" onClick={handleToggle}>
-        <FaGear size={21} />
-      </NavLink>
+      {user.data.user.role === "admin" && (
+        <NavLink to="settings" name="Settings" onClick={handleToggle}>
+          <FaGear size={21} />
+        </NavLink>
+      )}
       <NavLink to="help" name="Help and Tips" onClick={handleToggle}>
         <MdTipsAndUpdates size={25} />
       </NavLink>

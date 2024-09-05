@@ -8,6 +8,7 @@ import Modal from "../../components/Modal";
 import MyMap from "./MyMap";
 import { useDeleteReport } from "../../hooks/useDeleteReports";
 import { useUpdateReport } from "../../hooks/useUpdateReports";
+import { useAuth } from "../../hooks/getUser";
 
 interface Sender {
   _id: string;
@@ -32,6 +33,8 @@ interface Report {
 }
 
 const ComplainPreview = ({ report }) => {
+  const { user } = useAuth();
+  const agent = user.data.user.role === "agent";
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const modalContent = useSelector((state: RootState) => state.modal.content);
   const { isDeleting, mutate: deleteFn } = useDeleteReport();
@@ -102,12 +105,14 @@ const ComplainPreview = ({ report }) => {
           disable={isUpdating || report.status === "resolved"}
           onClick={() => update(report._id)}
         />
-        <FormBtn
-          del={true}
-          label="Delete "
-          disable={false}
-          onClick={handleDelete}
-        />
+        {!agent && (
+          <FormBtn
+            del={true}
+            label="Delete "
+            disable={false}
+            onClick={handleDelete}
+          />
+        )}
       </div>
       <Modal isOpen={isModalOpen} onClose={close}>
         {modalContent}
