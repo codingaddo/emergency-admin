@@ -14,7 +14,8 @@ interface ProtectProps {
 }
 function ProtectedRoute({ children }: ProtectProps) {
   const { user, isLoading } = useAuth();
-  const isAuthenticated = user?.data?.user?.role === "admin";
+  const isAuthenticated =
+    user?.data?.user?.role === "admin" || user?.data?.user?.role === "agent";
   const navigate = useNavigate();
 
   //1. Show a spinner while loading the user

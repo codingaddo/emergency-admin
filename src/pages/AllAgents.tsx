@@ -7,8 +7,10 @@ import { RootState } from "../store";
 import ConfirmDelete from "../features/user/ConfirmDelete";
 import { useGetAgents } from "../hooks/useGetAgents";
 import EditUserForm from "../features/user/EditUserForm";
+import { useAuth } from "../hooks/getUser";
 
 const AllAgents = () => {
+  const { user } = useAuth();
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const modalContent = useSelector((state: RootState) => state.modal.content);
   const { data, isLoading } = useGetAgents();
@@ -43,22 +45,33 @@ const AllAgents = () => {
 
   return (
     <>
-      <div className="sm:flex flex-wrap sm:gap-4 md:grid grid-cols-2 gap-5 pt-7">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : data.data.agents === 0 ? (
-          <h2>No Agents found</h2>
-        ) : (
-          data.data.agents.map((agent) => (
-            <UserCard
-              key={agent._id}
-              userName={agent.name}
-              onDelete={() => handleDeleteUser()}
-              onEdit={() => handleEditUser(agent)}
-            />
-          ))
-        )}
-      </div>
+      {user?.data?.user?.role === "admin" ? (
+        <div className="sm:flex flex-wrap sm:gap-4 md:grid grid-cols-2 gap-5 pt-7">
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : data.data.agents === 0 ? (
+            <h2>No Agents found</h2>
+          ) : (
+            data.data.agents.map((agent) => (
+              <UserCard
+                key={agent._id}
+                userName={agent.name}
+                onDelete={() => handleDeleteUser()}
+                onEdit={() => handleEditUser(agent)}
+              />
+            ))
+          )}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-bold text-blue-950 text-2xl">My Account</h1>
+          <div>
+            <p>{user.data.user.name}</p>
+            <p>{user.data.user.email}</p>
+            <p>{user.data.user.phone}</p>
+          </div>
+        </div>
+      )}
       <Modal isOpen={isModalOpen} onClose={close}>
         {modalContent}
       </Modal>

@@ -1,6 +1,6 @@
 import { FaGear } from "react-icons/fa6";
 import SettingsNav from "../features/settings/SettingsNav";
-import Search from "../features/settings/Search";
+// import Search from "../features/settings/Search";
 import { IoMdArrowBack } from "react-icons/io";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
@@ -33,8 +33,8 @@ const Settings = () => {
           <h1>Agent Info</h1>
         )}
       </div>
-      {!location.pathname.includes("user-details") &&
-        !location.pathname.includes("add-agent") && <Search />}
+      {/* {!location.pathname.includes("user-details") &&
+        !location.pathname.includes("add-agent") && <Search />} */}
       <div>
         <Outlet />
       </div>

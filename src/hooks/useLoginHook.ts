@@ -18,13 +18,21 @@ export const useLogin = () => {
       return user;
     },
     onSuccess: (user) => {
+      console.log(user);
       if (!user) return;
-      if (user.data && user.data.user.role !== "admin") {
+      if (
+        user.data &&
+        user.data.user.role !== "agent" &&
+        user.data.user.role !== "admin"
+      ) {
         toast.error("Permission denied");
         navigate("/login", { replace: true });
         return;
       }
-      if (user.data && user.data.user.role === "admin") {
+      if (
+        user.data &&
+        (user.data.user.role === "admin" || user.data.user.role === "agent")
+      ) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", user.token);
         queryClient.setQueryData(["user"], user);
