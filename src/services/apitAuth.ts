@@ -50,8 +50,11 @@ export const login = async (loginData: LoginRequest) => {
 
 export const logout = async () => {
   try {
-    await API.get("/users/logout");
+    const res = await API.get("/users/logout");
+    console.log(res);
+    return res.data;
   } catch (error) {
+    console.log(error);
     throw new Error("Failed to logout");
   }
 };
