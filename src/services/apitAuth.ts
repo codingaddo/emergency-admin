@@ -1,14 +1,22 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
+// export const BASE_URL = "http://127.0.0.1:8000/api/v1";
 export const BASE_URL =
   "https://emergency-reporting-system-2.onrender.com/api/v1";
 
+export interface PasswordInterface {
+  password: string;
+  passwordConfirm: string;
+}
 export interface LoginRequest {
   username: string;
   password: string;
 }
 
+export interface ResetInface {
+  email: string;
+}
 export const API = axios.create({
   baseURL: BASE_URL,
 });
@@ -56,5 +64,42 @@ export const logout = async () => {
   } catch (error) {
     console.log(error);
     throw new Error("Failed to logout");
+  }
+};
+
+export const forgotPassword = async (email: ResetInface) => {
+  try {
+    const res = await API.post("/users/forgot-password", email, {
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log(res);
+    return res.data;
+  } catch (error: any) {
+    console.log(error.response.data.message);
+    if (error.response.status === 404) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("Failed, Please try again");
+    }
+  }
+};
+
+export const resetPassword = async (
+  token: string,
+  passwordData: PasswordInterface
+) => {
+  try {
+    const res = await API.patch(
+      `/users/reset-password/${token}`,
+      passwordData,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    console.log(res);
+    return res.data;
+  } catch (error: any) {
+    console.log(error.response.data.message);
+    throw new Error(error.response.data.message);
   }
 };

@@ -15,6 +15,8 @@ import ComplainDetails from "./pages/ComplainDetails";
 import { Toaster } from "react-hot-toast";
 import { requestNotificationPermission } from "./features/complaints/notification";
 import { useEffect } from "react";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   useEffect(() => {
@@ -60,6 +62,8 @@ function App() {
               </Route>
             </Route>
             <Route path="*" element={<PageNotFound />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="login" element={<Login />} />
           </Routes>
         </BrowserRouter>
