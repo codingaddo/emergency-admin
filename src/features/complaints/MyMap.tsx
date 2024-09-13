@@ -116,7 +116,7 @@ interface MapComponentProps {
   speed?: number; // km/h, default to walking speed
 }
 
-const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
+const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 1 }) => {
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
@@ -175,13 +175,18 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
     } else {
       setError("Geolocation is not supported by this browser.");
     }
-  }, [updateUserLocation]);
+  }, []);
 
   const positions: LatLngExpression[] = [
-    // [userLocation.lat, userLocation.lng],
-    [7.3501398, -2.3399661],
+    [userLocation.lat, userLocation.lng],
+    // [7.3501398, -2.3399661],
     [destination.lat, destination.lng],
   ];
+  // console.log(userLocation.lat, userLocation.lng);
+  const lat = userLocation.lat;
+  const lng = userLocation.lng;
+  console.log(lat);
+  console.log(lng);
 
   const userIcon = createCustomIcon(
     <FaMapMarkerAlt color="blue" size="25px" />
@@ -197,8 +202,8 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
       ) : (
         <>
           <MapContainer
-            center={[7.3501398, -2.3399661]}
-            // center={[userLocation.lat, userLocation.lng]}
+            // center={[7.3501398, -2.3399661]}
+            center={[lat, lng]}
             zoom={13}
             style={{ height: "500px", width: "100%" }}
           >
@@ -206,11 +211,11 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 0.7 }) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {/* <RecenterMap lat={userLocation.lat} lng={userLocation.lng} /> */}
-            <RecenterMap lat={7.3501398} lng={-2.3399661} />
+            <RecenterMap lat={lat} lng={lng} />
+            {/* <RecenterMap lat={7.3501398} lng={-2.3399661} /> */}
             <Marker
-              // position={[userLocation.lat, userLocation.lng]}
-              position={[7.3501398, -2.3399661]}
+              position={[lat, lng]}
+              // position={[7.3501398, -2.3399661]}
               icon={userIcon}
             />
             <Marker
