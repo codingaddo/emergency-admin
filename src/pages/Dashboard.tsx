@@ -7,8 +7,12 @@ import { CgViewMonth } from "react-icons/cg";
 import Chart from "../features/dashboard/Chart";
 import Pichart from "../features/dashboard/MyPieChart";
 import ChartLayout from "../ui/ChartLayout";
+// import { useGetReports } from "../hooks/useGetReports";
 
 const Dashboard = () => {
+  // const { reports: data, isLoading, error } = useGetReports();
+  // console.log(data.data);
+
   return (
     <div className="sm:pb-10">
       <div className="flex items-center pt-5 gap-2 px-10 ">
@@ -58,6 +62,8 @@ const Dashboard = () => {
           />
         </div>
       </div>
+      {/* {data && (
+        )} */}
       <ChartLayout>
         <Chart />
         <Pichart />

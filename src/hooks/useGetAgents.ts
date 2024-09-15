@@ -6,7 +6,7 @@ export const useGetAgents = () => {
     queryKey: ["agents"],
     queryFn: async () => {
       const agents = await getAgents();
-      console.log(agents);
+      // console.log(agents);
       return agents;
     },
   });

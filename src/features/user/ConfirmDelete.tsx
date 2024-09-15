@@ -20,8 +20,9 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
     mutateFunction(id, {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: ["reports"],
+          queryKey: ["reports", "agents"],
         });
+        queryClient.invalidateQueries({ queryKey: ["agents"] });
         onClose();
       },
     });

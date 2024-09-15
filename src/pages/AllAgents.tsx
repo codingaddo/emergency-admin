@@ -8,26 +8,33 @@ import ConfirmDelete from "../features/user/ConfirmDelete";
 import { useGetAgents } from "../hooks/useGetAgents";
 import EditUserForm from "../features/user/EditUserForm";
 import { useAuth } from "../hooks/getUser";
+import { useDeleteAgent } from "../hooks/useDeleteAgent";
 
 const AllAgents = () => {
   const { user } = useAuth();
   const isModalOpen = useSelector((state: RootState) => state.modal.isOpen);
   const modalContent = useSelector((state: RootState) => state.modal.content);
+  const { mutate: deleteFn, isDeleting } = useDeleteAgent();
   const { data, isLoading } = useGetAgents();
   if (isLoading) {
     console.log(isLoading);
   }
   if (data) {
-    console.log(data.data.agents);
+    // console.log(data.data.agents);
   }
   const dispatch = useDispatch();
   const close = () => dispatch(closeModal());
 
-  const handleDeleteUser = () => {
+  const handleDeleteUser = (agentId: string) => {
     dispatch(
       openModal(
         <>
-          <ConfirmDelete onClose={close} />
+          <ConfirmDelete
+            mutateFunction={deleteFn}
+            id={agentId}
+            isMutating={isDeleting}
+            onClose={close}
+          />
         </>
       )
     );
@@ -54,9 +61,10 @@ const AllAgents = () => {
           ) : (
             data.data.agents.map((agent) => (
               <UserCard
+                agent={{ agent }}
                 key={agent._id}
                 userName={agent.name}
-                onDelete={() => handleDeleteUser()}
+                onDelete={() => handleDeleteUser(agent._id)}
                 onEdit={() => handleEditUser(agent)}
               />
             ))

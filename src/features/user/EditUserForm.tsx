@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import TextInput from "../../ui/TextInput";
 import FormBtn from "../../ui/FormBtn";
 import { useEffect } from "react";
+import { useUpdateAgent } from "../../hooks/useUpdateAgent";
+import { useDispatch } from "react-redux";
+import { closeModal } from "../slices/modalSlice";
 
 interface userData {
   name: string;
@@ -10,6 +13,11 @@ interface userData {
 }
 
 const EditUserForm = (data) => {
+  const { mutate: update, isPending: isUpdating } = useUpdateAgent();
+  const dispatch = useDispatch();
+  const close = () => dispatch(closeModal());
+  const id = data.data._id;
+  console.log(id);
   const {
     handleSubmit,
     reset,
@@ -29,7 +37,15 @@ const EditUserForm = (data) => {
   }, [data, reset]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+    update(
+      { id: id, userData: data },
+      {
+        onSuccess: () => {
+          close();
+        },
+      }
+    );
   };
   return (
     <form
@@ -69,7 +85,7 @@ const EditUserForm = (data) => {
           // },
         }}
       />
-      <FormBtn label={"Edit"} disable={!isDirty} />
+      <FormBtn label={isUpdating ? "Updating..." : "Edit"} disable={!isDirty} />
     </form>
   );
 };

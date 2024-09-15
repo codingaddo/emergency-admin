@@ -7,9 +7,10 @@ interface UserCardProps {
   userName: string;
   onEdit: () => void;
   onDelete: () => void;
+  agent: object;
 }
 
-const UserCard = ({ userName, onDelete, onEdit }: UserCardProps) => {
+const UserCard = ({ userName, onDelete, onEdit, agent }: UserCardProps) => {
   const { user, isLoading } = useAuth();
 
   return (
@@ -24,6 +25,7 @@ const UserCard = ({ userName, onDelete, onEdit }: UserCardProps) => {
         {user?.data?.user?.role === "admin" && (
           <div className="flex gap-2 sm:gap-4 py-2">
             <NavLink
+              state={agent}
               to={`/settings/user-details/${11}`}
               className="flex items-center cursor-pointer"
               title="details"

@@ -9,8 +9,10 @@ import {
 } from "recharts";
 import { sampleReports } from "../../helpers/sampleData";
 import { transformAreaChartDataByMonth } from "../../helpers/transformData";
-const Chart = () => {
+
+const Chart = ({ data }: object) => {
   const reports = transformAreaChartDataByMonth(sampleReports);
+  // const reports = transformAreaChartDataByMonth(data);
   return (
     <>
       <ResponsiveContainer width="100%" height={300}>

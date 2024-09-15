@@ -224,12 +224,12 @@ const MyMap: React.FC<MapComponentProps> = ({ destination, speed = 1 }) => {
             />
             <Polyline positions={positions} color="blue" />
           </MapContainer>
-          {timeToDestination !== null && (
+          {/* {timeToDestination !== null && (
             <p>
               Estimated time to destination:{" "}
               {Math.floor(timeToDestination * 60)} minutes
             </p>
-          )}
+          )} */}
         </>
       )}
     </div>

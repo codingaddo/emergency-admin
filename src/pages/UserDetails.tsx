@@ -1,5 +1,16 @@
+import { useLocation } from "react-router-dom";
+
 const UserDetails = () => {
-  return <div>UserDetails</div>;
+  const { state } = useLocation();
+  const { agent } = state || {};
+  console.log(agent);
+  return (
+    <div>
+      <div>
+        <p>{agent.name}</p>
+      </div>
+    </div>
+  );
 };
 
 export default UserDetails;
