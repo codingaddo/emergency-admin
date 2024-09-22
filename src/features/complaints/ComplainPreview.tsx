@@ -39,6 +39,7 @@ const ComplainPreview = ({ report }) => {
   const modalContent = useSelector((state: RootState) => state.modal.content);
   const { isDeleting, mutate: deleteFn } = useDeleteReport();
   const { isUpdating, mutate: update } = useUpdateReport();
+  console.log(report?.mediaUrl);
 
   const dispatch = useDispatch();
   const close = () => dispatch(closeModal());
@@ -77,7 +78,14 @@ const ComplainPreview = ({ report }) => {
             label="Sender"
             text={report?.sender?.name || "N/A"}
           />
-          <ComplaintContainer label="Location" text="Sunyani Fiapre" />
+          <ComplaintContainer
+            label="Google Loc"
+            text={report.location || "N/A"}
+          />
+          <ComplaintContainer
+            label="Confrimed Loc"
+            text={report.confrimLocation || "N/A"}
+          />
           <ComplaintContainer
             label="phone"
             text={report?.sender?.phone || "N/A"}
@@ -96,8 +104,27 @@ const ComplainPreview = ({ report }) => {
         <p className=" capitalize">{report?.description || "N/A"}</p>
       </div>
       <div>
-        <h2>Attach file</h2>
-        <button>file</button>
+        <h2>Attached file</h2>
+        {report?.mediaUrl ? (
+          <div>
+            <img
+              className="w-[400px] h-[250px] object-contain"
+              // src={report.mediaUrl}
+              src={`https://emergency-reporting-system-2.onrender.com${report?.mediaUrl}`}
+              alt="report-img.jpg"
+            />
+
+            {/* <video controls className="w-[400px] h-[250px] object-cover">
+              <source
+                src={`https://emergency-reporting-system-2.onrender.com${report.mediaUrl}`}
+                type={report.mimeType}
+              />
+              Your browser does not support the video tag.
+            </video> */}
+          </div>
+        ) : (
+          <p>No media was attached</p>
+        )}
       </div>
       <div className="flex gap-5">
         <FormBtn

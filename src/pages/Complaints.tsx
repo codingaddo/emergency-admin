@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import ComplaintContainer from "../features/complaints/ComplaintContainer";
 import ComplaintNav from "../features/complaints/ComplaintNav";
 import { useGetReports } from "../hooks/useGetReports";
@@ -21,20 +21,17 @@ const Complaints = () => {
 
   useEffect(() => {
     connectSocket();
-
     socket.on("new-report", (newReport) => {
       // Update the React Query cache with the new report
       queryClient.setQueryData(["reports"], (oldReports) => {
         return oldReports ? [newReport, ...oldReports] : [newReport];
       });
-      setTimeout(() => {
-        if ("Notification" in window && Notification.permission === "granted") {
-          console.log("Starting notification");
-          new Notification("Test Notification", {
-            body: "This is a test notification.",
-          });
-        }
-      }, 500);
+      if ("Notification" in window && Notification.permission === "granted") {
+        console.log("Starting notification");
+        new Notification("Test Notification", {
+          body: "This is a test notification.",
+        });
+      }
     });
 
     return () => {
@@ -88,8 +85,12 @@ const Complaints = () => {
                   text={report.sender.name || "N/A"}
                 />
                 <ComplaintContainer
-                  label="Location"
+                  label="Google Loc"
                   text={report.locationName || "N/A"}
+                />
+                <ComplaintContainer
+                  label="confrimed Loc"
+                  text={report.confrimLocation || "N/A"}
                 />
                 <ComplaintContainer label="Status" text={report.status} />
               </div>
