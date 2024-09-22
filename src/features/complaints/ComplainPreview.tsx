@@ -104,7 +104,7 @@ const ComplainPreview = ({ report }) => {
         <p className=" capitalize">{report?.description || "N/A"}</p>
       </div>
       <div>
-        <h2>Attached file</h2>
+        <h2 className=" font-semibold pb-4">Attached file</h2>
         {report?.mediaUrl ? (
           <div>
             <img
