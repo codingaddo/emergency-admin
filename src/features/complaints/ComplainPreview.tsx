@@ -97,10 +97,10 @@ const ComplainPreview = ({ report }) => {
 
           <ComplaintContainer label="Status" text={report?.status} />
         </div>
-        <div>Sender image</div>
+        {/* <div>Sender image</div> */}
       </div>
       <div>
-        <h2 className=" text-lg">Report Description</h2>
+        <h2 className=" text-lg font-semibold">Report Description</h2>
         <p className=" capitalize">{report?.description || "N/A"}</p>
       </div>
       <div>

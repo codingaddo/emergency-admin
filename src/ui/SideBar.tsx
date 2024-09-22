@@ -19,10 +19,10 @@ const SideBar = () => {
       }
     >
       <div className="flex flex-col gap-5 items-center justify-center">
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <MdOutlineSecurity size={40} />
-          <img src="" alt="logo" />
-        </div>
+          <img src="/public/gps-logo.jpeg" alt="logo" className="w-10" />
+        </div> */}
         <h2 className="text-lg font-bold capitalize">
           Ghana {service} Service
         </h2>
