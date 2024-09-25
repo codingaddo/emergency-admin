@@ -3,7 +3,6 @@ import AppLayout from "./ui/AppLayout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Dashboard from "./pages/Dashboard";
 import Complaints from "./pages/Complaints";
-import Stat from "./pages/Stat";
 import Settings from "./pages/Settings";
 import AddAgents from "./pages/AddAgents";
 import AllAgents from "./pages/AllAgents";
@@ -17,6 +16,7 @@ import { requestNotificationPermission } from "./features/complaints/notificatio
 import { useEffect } from "react";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Help from "./pages/Help";
 
 function App() {
   useEffect(() => {
@@ -43,7 +43,7 @@ function App() {
             >
               <Route index element={<Navigate replace to={"dashboard"} />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="help" element={<Stat />} />
+              <Route path="help" element={<Help />} />
 
               <Route path="complaints" element={<Complaints />}>
                 <Route index element={<Navigate replace to={"complaints"} />} />

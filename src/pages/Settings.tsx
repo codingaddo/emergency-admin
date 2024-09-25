@@ -30,7 +30,9 @@ const Settings = () => {
         {!location.pathname.includes("user-details") ? (
           <SettingsNav />
         ) : (
-          <h1>Agent Info</h1>
+          <h1 className="text-2xl text-center pb-3 font-semibold text-blue-950">
+            Agent Info
+          </h1>
         )}
       </div>
       {/* {!location.pathname.includes("user-details") &&

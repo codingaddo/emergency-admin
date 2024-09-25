@@ -1,6 +1,5 @@
 import Modal from "../components/Modal";
 import UserCard from "../features/settings/UserCard";
-import AddUserForm from "../features/user/AddUserForm";
 import { openModal, closeModal } from "../features/slices/modalSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
@@ -9,6 +8,7 @@ import { useGetAgents } from "../hooks/useGetAgents";
 import EditUserForm from "../features/user/EditUserForm";
 import { useAuth } from "../hooks/getUser";
 import { useDeleteAgent } from "../hooks/useDeleteAgent";
+import Spinner from "../ui/Spinner";
 
 const AllAgents = () => {
   const { user } = useAuth();
@@ -55,7 +55,9 @@ const AllAgents = () => {
       {user?.data?.user?.role === "admin" ? (
         <div className="sm:flex flex-wrap sm:gap-4 md:grid grid-cols-2 gap-5 pt-7">
           {isLoading ? (
-            <div>Loading...</div>
+            <div className=" absolute right-[40%] ">
+              <Spinner />
+            </div>
           ) : data.data.agents === 0 ? (
             <h2>No Agents found</h2>
           ) : (
